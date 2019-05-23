@@ -25,3 +25,19 @@
     width:45px;
     height:40px;
 }
+.blue{
+    border-radius: 50%;
+    background: #6ca1fc;
+    width:30px;
+    height:30px;
+}
+#score-display{
+    margin:10px auto;
+    width:100px;
+    height: 100px;
+    border-radius: 20px;
+    font-size: 70px;
+    text-align:center;
+    font-style: normal;
+    background: #f4ee42;    
+}
