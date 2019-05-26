@@ -31,6 +31,12 @@
     width:30px;
     height:30px;
 }
+.redBall{
+   border-radius: 50%;
+   background: rebeccapurple;
+   width:40px;
+   height: 40px;
+}
 #score-display{
     margin:10px auto;
     width:100px;
@@ -41,3 +47,19 @@
     font-style: normal;
     background: #f4ee42;    
 }
+#Progress_Status { 
+    width: 50%; 
+    background-color: #ddd; 
+    } 
+    
+#myprogressBar { 
+    width: 1%; 
+    height: 35px; 
+    background-color: #4CAF50; 
+    text-align: center; 
+    line-height: 32px; 
+    color: black; 
+    } 
+    .red{
+        background: red;
+    }

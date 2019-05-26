@@ -23,6 +23,7 @@ function addBlue(){
     randomDiv=document.getElementById(addRandomBlue);
     divBox=document.createElement('div');
     divBox.setAttribute('class','blue');
+    divBox.setAttribute('id','blueBall')
     randomDiv.appendChild(divBox);
 }
 //remove Blue 
@@ -31,6 +32,13 @@ function removeBlue(ID){
     console.log("remove it from grid-item div",removeDiv);
     removeDiv.remove();
     addBlue();
+}
+
+//remove red
+function removeRed(ID){
+    var removeDiv=document.getElementById(ID).getElementsByClassName('red')[0];
+    console.log("remove it from grid-item div",removeDiv);
+    removeDiv.remove();
 }
 //remove function
 function removeBox(ID){
@@ -73,6 +81,85 @@ function addBox(ID){
                                                 `;
                                                
 }
+//redScorer timer bar
+function progressBar(){
+    divProgress=document.getElementById('Progress_Status');
+    divBoxProgress=document.createElement('div');
+    divBoxProgress.setAttribute('id','myprogressBar');
+    // divBox.setAttribute('class','timer')
+    divProgress.appendChild(divBoxProgress);
+    console.log('////////////////////////////////////',divProgress)
+}
+//randomRed scorer
+function redScore(){
+    
+    var checkdiv=document.getElementById('timer');
+
+var checkExistance=document.body.contains(checkdiv)
+   
+    console.log('checkdiv------------------------------------------------->',checkExistance)
+    //check if red score is present or not
+    if(!checkExistance){
+    y=25,x=1;
+    var width=100;
+    var randomRedID="item"+(Math.floor(Math.random()*((y-x)+1)+ x));
+    console.log('value of random generator ==========================))))))))))))) ',(randomRedID));
+    //check for other divs if present
+    //
+    var blue=document.getElementById('blueBall');
+        var check=document.getElementById(randomRedID).contains(blue);
+        //check if div have blue already or not
+        if(!check){
+    // var check=document.getElementById(randomRedID).getElementsByTagName('div').length;
+    // console.log('11111111111111111111111111111111111111111111111',check);
+    randomDiv=document.getElementById(randomRedID);
+    divBox=document.createElement('div');
+    divBox.setAttribute('class','redBall');
+    divBox.setAttribute('id','timer')
+    randomDiv.appendChild(divBox);
+    console.log("PROGRESS TIMER=============",randomDiv);
+    progressBar();
+    var setTimer= setInterval(timer,100);
+    
+
+    //remove redScorer timer and redScore
+    function timer(){
+       
+        var blue=document.getElementById('blueBall');
+        var check=document.getElementById(randomRedID).contains(blue);
+        // console.log()
+        // if(check){clearInterval(setTimer)}
+        // else{
+            
+        // }
+        if(width<=0){
+            clearInterval(setTimer);
+            //remove progressbar and redScorer
+            var removeTimer= document.getElementById('myprogressBar');
+            console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaa',removeTimer);
+            var redBall=document.getElementById('timer');
+            console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaa',redBall);
+            console.log('removeTimererere......................................',removeTimer);
+            removeTimer.remove();
+            redBall.remove();
+        }
+        else{
+            width= width -1;
+             var bar=document.getElementById('myprogressBar');
+            if(width<30){
+                bar.classList.add('red');
+            }
+            bar.style.width= width +'%';
+        }
+    }
+   }
+   else{
+       clearInterval(redScorer);
+   }
+}//end for red existance
+}
+
+//capture event 
  function eventCapture(e){
      count++;
      console.log(randomNumber);
@@ -80,9 +167,13 @@ function addBox(ID){
      document.getElementById("demo").innerHTML = "The pressed key was: " + h;
      
      var idName= 'item'+randomNumber;
+     var randomRedTime=Math.floor(Math.random()*((5-1)+1)+ 1);
+     console.log("random time----------------------------------------------",randomRedTime)
     console.log(idName);
     if(count === 1){
         addBox(idName);
+        
+        var RedScorer=setInterval(redScore,5000);
         addBlue();
     }
 
