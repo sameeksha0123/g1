@@ -1,2 +1,2 @@
 # g1
-Trying to build a game with css grid as base.
+Trying to build a snake game with css grid as base and simple javascript.
