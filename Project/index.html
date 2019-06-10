@@ -9,12 +9,16 @@
     <!-- <script src="main.js"></script> -->
 </head>
 
-<body onkeydown="eventCapture(event)">
-
+<body onload="StartScreen()"  onkeydown="eventCapture(event)">
+    <div class="modal" id='startModal'>
+        <div class='modal-content'>
+            <h1>START GAME</h1>
+        </div>
+    </div>
     <p>Press any arrow key on the keyboard</p>
     <p id="demo"></p>
 
-    <div class="grid-container">
+    <div class="grid-container" id='playground'>
         <div class="grid-item " id="item1"></div>
         <div class="grid-item " id="item2"></div>
         <div class="grid-item " id="item3"></div>
@@ -46,11 +50,27 @@
         <div class="grid-item " id="item24"></div>
         <div class="grid-item " id="item25"></div>
     </div>
+    non functional buttons
     <section class="btn-section">
-        <div class="restart"><button onclick='restart()'>RESTART</button></div>
+    
+            <button class='btn' id="restart"
+             <!-- onclick='restart_btn()'  -->
+             >RESTART</button>
+            <button class='btn' id="pause" disabled=true>PAUSE</button>
+        
     </section>
+    <div id="Progress_Status"> </div>
     <section id="score-display"></section>
-    <script src='main-2.js'></script>
+    <div class="modal" id='arrowInstruct'>
+        <div class='modal-content'>
+            <h1>USE ONLY ARROW KEYS</h1>
+            <p>UP Arrow</p>
+            <p><span>Left Arrow</span><span>Right Arrow</span> </p>
+            <p>DOWN Arrow</p>
+        </div>
+    </div>
+   
+    <script src='functionalMain.js'></script>
 </body>
 
 </html>

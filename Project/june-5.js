@@ -1,11 +1,70 @@
 var count=0;
 var randomNumber;
 var score=0;
-window.onload= this.randomGenerator();
+
+//restart button function
+var restartBtn=document.getElementById('restart');
+restartBtn.addEventListener('click',restart_btn);
+function restart_btn(){
+    count=0;
+    randomNumber;
+    score=0;
+    var snakebox=document.getElementById('snake');
+    var redFood=document.getElementById('timer');
+    var blueFood=document.getElementById('blueBall');
+    var progressBar=document.getElementById('myprogressBar');
+    console.log(snakebox,redFood,blueFood);
+    var checkBlueFood=document.getElementById('playground').contains(blueFood);
+    var checkRedFood=document.getElementById('playground').contains(redFood);
+    var checkprogressBar=document.getElementById('playground').contains(progressBar);
+    var checkSnake=document.getElementById('playground').contains(snakebox);
+
+    if(checkBlueFood){
+        blueFood.remove();
+    }
+    if(checkSnake){
+        snakebox.remove();
+    }
+    if(checkRedFood){
+        redFood.remove();
+        progressBar.remove();
+        clearInterval(setTimer);
+        // //remove progressbar and redScorer
+        // var removeTimer= document.getElementById('myprogressBar');
+        // console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaa',removeTimer);
+        // var redBall=document.getElementById('timer');
+        // console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaa',redBall);
+        // console.log('removeTimererere......................................',removeTimer);
+        // removeTimer.remove();
+        // redBall.remove();
+
+    }
+    
+    
+    // body.getElementById('playground').contains(blueFood);
+    // document.body.getElementById('playground').contains(snakebox);
+    
+    
+    // snakebox.remove();
+    // StartScreen();
+    // randomGenerator();
+window.addEventListener('onload',StartScreen());
+window.addEventListener('onload',this.randomGenerator());
+}
+//start screen display
+function StartScreen(){
+var modal=document.getElementById('startModal');
+modal.style.display='block';
+}
+window.addEventListener('onload',StartScreen());
+window.addEventListener('onload',this.randomGenerator());
+//random number generator
+// window.onload= this.randomGenerator();
 function randomGenerator(){
     var y=25,x=1;
     randomNumber= Math.floor(Math.random()*((y-x)+1)+ x);
 }
+//end of random generator
 console.log(randomNumber);
 
 //display score
@@ -29,16 +88,17 @@ function addBlue(){
 //remove Blue 
 function removeBlue(ID){
     var removeDiv=document.getElementById(ID).getElementsByClassName('blue')[0];
-    console.log("remove it from grid-item div",removeDiv);
+    console.log("remove it from grid-item div blue````````",removeDiv);
     removeDiv.remove();
     addBlue();
 }
 
-//remove red
+// //remove red
 function removeRed(ID){
     var removeDiv=document.getElementById(ID).getElementsByClassName('red')[0];
-    console.log("remove it from grid-item div",removeDiv);
+    console.log("remove it from grid-item div red",removeDiv);
     removeDiv.remove();
+    addBox(ID);
 }
 //remove function
 function removeBox(ID){
@@ -58,7 +118,24 @@ function addBox(ID){
     console.log("html collection to check whether to add div or not===",Divcheck);
     console.log('random div while adding div',randomDiv);
     console.log('check length of HTML collection',Divcheck.length);
-    if(Divcheck.length === 1){
+    console.log('random div if conatins blue food----------:',randomDiv.contains(document.getElementById('blueBall')));
+    var checkBlue=randomDiv.contains(document.getElementById('blueBall'));
+    var checkRed=randomDiv.contains(document.getElementById('timer'));
+    // if(Divcheck.length === 2){
+        if(checkRed){
+        score += 5; console.log('score---------------------------------',score);
+        // removeRed(ID);
+        var removeTimer= document.getElementById('myprogressBar');
+            console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaa',removeTimer);
+            var redBall=document.getElementById('timer');
+            console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaa',redBall);
+            console.log('removeTimererere......................................',removeTimer);
+            removeTimer.remove();
+            redBall.remove();
+        
+    }
+    // else if(Divcheck.length === 1){
+       else if(checkBlue){
         score += 1; console.log('score---------------------------------',score);
         removeBlue(ID);
 
@@ -70,6 +147,7 @@ function addBox(ID){
     //divBox.classList.add("box");
     //2.by setAttribute method attribute n property in key:value pair
     divBox.setAttribute("class","box");
+    divBox.setAttribute('id','snake');
     console.log(divBox);
     //****************** to get html line in js prefer id
     // console.log(document.body)
@@ -94,20 +172,18 @@ function progressBar(){
 function redScore(){
     
     var checkdiv=document.getElementById('timer');
-
 var checkExistance=document.body.contains(checkdiv)
-   
     console.log('checkdiv------------------------------------------------->',checkExistance)
     //check if red score is present or not
     if(!checkExistance){
     y=25,x=1;
     var width=100;
     var randomRedID="item"+(Math.floor(Math.random()*((y-x)+1)+ x));
-    console.log('value of random generator ==========================))))))))))))) ',(randomRedID));
+    // console.log('value of random generator ==========================))))))))))))) ',(randomRedID));
     //check for other divs if present
     //
     var blue=document.getElementById('blueBall');
-        var check=document.getElementById(randomRedID).contains(blue);
+    var check=document.getElementById(randomRedID).contains(blue);
         //check if div have blue already or not
         if(!check){
     // var check=document.getElementById(randomRedID).getElementsByTagName('div').length;
@@ -117,21 +193,17 @@ var checkExistance=document.body.contains(checkdiv)
     divBox.setAttribute('class','redBall');
     divBox.setAttribute('id','timer')
     randomDiv.appendChild(divBox);
-    console.log("PROGRESS TIMER=============",randomDiv);
+    // console.log("PROGRESS TIMER=============",randomDiv);
     progressBar();
     var setTimer= setInterval(timer,100);
-    
-
     //remove redScorer timer and redScore
     function timer(){
-       
-        var blue=document.getElementById('blueBall');
-        var check=document.getElementById(randomRedID).contains(blue);
-        // console.log()
-        // if(check){clearInterval(setTimer)}
-        // else{
-            
-        // }
+          console.log("0000000000000000000000000000000000000000000000000000000000000",randomRedID);
+            // var divsnake=document.getElementById('snake');
+            // var check=document.getElementById(randomRedID).contains(divsnake);
+            console.log('divSNAKE',divsnake);
+
+        //showing timer
         if(width<=0){
             clearInterval(setTimer);
             //remove progressbar and redScorer
@@ -145,8 +217,48 @@ var checkExistance=document.body.contains(checkdiv)
         }
         else{
             width= width -1;
+            console.log('timer width',width)
+            
+            // condition when snake comes to eat red Food with timer on
+            var divsnake=document.getElementById('snake');
+            var check=document.getElementById(randomRedID).contains(divsnake);
+            console.log('*****************************************************',check);
+                //condition when snake is available
+            if(check){
+                // score += 5; console.log('score---------------------------------',score);
+            //       removeBlue(ID);
+            clearInterval(setTimer);
+            scoredisplay();
+            //remove progressbar and redScorer
+            var removeTimer= document.getElementById('myprogressBar');
+            console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaa',removeTimer);
+            var redBall=document.getElementById('timer');
+            console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaa',redBall);
+            console.log('removeTimererere......................................',removeTimer);
+            removeTimer.remove();
+            redBall.remove();
+            }
+            //end of condition 
+            
              var bar=document.getElementById('myprogressBar');
+        //       console.log("0000000000000000000000000000000000000000000000000000000000000inside else",randomRedID);
+        //       var redDiv=document.getElementById(randomRedID).getElementsByClassName('grid-item');
+        //       console.log('redDivvvv',redDiv);
+
+        //       var removeDiv=document.getElementById(randomRedID).getElementsByClassName('redBall');
+        //       console.log('check red event',removeDiv);
+        //     //   var box=document.getElementById('snake');
+        //       console.log('removeDiv',removeDiv);
+        //    console.log("IMPORTANT CHECK",redDiv.contains(removeDiv));
+        //       console.log('---------inside Timer----------')
+        //       console.log('redDiv',redDiv);
+        //       var Divcheck=document.getElementById(randomRedID).getElementsByTagName('div');
+        //       console.log("html collection to check whether to add div or not===-----------------",Divcheck);
+        //     //   console.log('random div while adding div',randomDiv);
+        //       console.log('check length of HTML collection ',Divcheck.length);
+              
             if(width<30){
+                console.log("RED")
                 bar.classList.add('red');
             }
             bar.style.width= width +'%';
@@ -154,21 +266,25 @@ var checkExistance=document.body.contains(checkdiv)
     }
    }
    else{
-       clearInterval(redScorer);
+       clearInterval(RedScorer);
    }
 }//end for red existance
 }
 
 //capture event 
  function eventCapture(e){
+    var modal=document.getElementById('startModal');
+    modal.style.display='none';
+    var instruct=document.getElementById('arrowInstruct');
+    instruct.style.display='none';
      count++;
      console.log(randomNumber);
      var h=e.key;
      document.getElementById("demo").innerHTML = "The pressed key was: " + h;
      
      var idName= 'item'+randomNumber;
-     var randomRedTime=Math.floor(Math.random()*((5-1)+1)+ 1);
-     console.log("random time----------------------------------------------",randomRedTime)
+    //  var randomRedTime=Math.floor(Math.random()*((5-1)+1)+ 1);
+    //  console.log("random time----------------------------------------------",randomRedTime)
     console.log(idName);
     if(count === 1){
         addBox(idName);
@@ -254,7 +370,9 @@ var checkExistance=document.body.contains(checkdiv)
             break;
         }
         default:{
-            alert("use only arrow keys")
+            // alert("use only arrow keys")
+            var modal=document.getElementById('arrowInstruct');
+            modal.style.display='block';    
         }
     }
     }
